@@ -30,8 +30,8 @@ COPY rhcontainerbot-podman-next-fedora.gpg /etc/pki/rpm-gpg/
 # When doing specific releases, we need to get the bodhi build from Fedora and install it
 # COPR should install most other updated things.
 RUN rpm-ostree override replace --experimental --freeze \
-	https://kojipkgs.fedoraproject.org//packages/podman/5.2.0/1.fc40/x86_64/podman-5.2.0-1.fc40.x86_64.rpm
-# https://kojipkgs.fedoraproject.org//packages/podman/5.2.0/1.fc40/aarch64/podman-5.2.0-1.fc40.aarch64.rpm
+	https://kojipkgs.fedoraproject.org//packages/podman/5.2.2/1.fc40/x86_64/podman-5.2.2-1.fc40.x86_64.rpm
+# https://kojipkgs.fedoraproject.org//packages/podman/5.2.2/1.fc40/aarch64/podman-5.2.2-1.fc40.aarch64.rpm
 
 
 # Replace aardvark-dns, conmon, crun, netavark, podman, containers-common
