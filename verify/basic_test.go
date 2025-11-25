@@ -34,6 +34,13 @@ var _ = Describe("run basic podman commands", func() {
 		Expect(err).ToNot(HaveOccurred())
 		Expect(session).To(Exit(0))
 
+		// use podman info to get distribution value
+		infoCmd := []string{"info", "--format", "{{.Host.Distribution.Distribution}}"}
+		infoSession, err := mb.setCmd(infoCmd).run()
+		Expect(err).ToNot(HaveOccurred())
+		Expect(infoSession).To(Exit(0))
+		machineDistribution := infoSession.outputToString()
+
 		// Pull an image
 		pull := []string{"pull", imgName}
 		pullSession, err := mb.setCmd(pull).run()
@@ -91,7 +98,8 @@ var _ = Describe("run basic podman commands", func() {
 
 		// systemd-binfmt.service is failing to configure emulation, so we cannot test that there yet
 		// https://github.com/containers/podman/issues/19961
-		if vmTestProvider != WSLVirt {
+		// Not all distributions can run cross-arch
+		if vmTestProvider != WSLVirt && machineDistribution != "rhel" {
 			// Test emulation so we know it always works, we had a kernel update
 			// broke rosetta on applehv so we like to catch that the next time.
 			var expectedArch string

@@ -16,7 +16,7 @@ func TestMain(m *testing.M) {
 }
 
 const (
-	defaultDiskSize uint = 11
+	defaultDiskSize uint = 25
 )
 
 var (
